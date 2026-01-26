@@ -9,36 +9,3 @@ export const $ = {
 		return $el;
 	},
 };
-
-
-export class Plugin {
-	css = new CSSStyleSheet();
-	$control = $.new();
-	constructor() {}
-	on() {
-		if (!document.adoptedStyleSheets.includes(this.css)) {
-			document.adoptedStyleSheets.push(this.css);
-		}
-	}
-	off() {
-		document.adoptedStyleSheets = document.adoptedStyleSheets.filter(
-			(s) => s !== this.css,
-		);
-	}
-}
-
-export class FixOpsPlugin extends Plugin {
-	constructor() {
-		super();
-		this.$control.innerHTML = /*html */ `<label>
-            <input type="checkbox"> fijar columna de operaciones
-        </label>`;
-		this.$control.addEventListener("change", (e) => {
-			e.target.checked ? this.on() : this.off();
-		});
-		this.css.insertRule(`tbody tr td:last-child{
-            position:sticky;
-            right:0;
-        }`);
-	}
-}

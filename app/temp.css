@@ -1,0 +1,21 @@
+#extension-panel{
+    position: fixed;
+    opacity: .7;
+}
+
+body{
+    background-color: red !important;
+}
+
+tbody tr{
+    &:has( > td:is(+ td:last-child)) {
+        background-color:red;    
+    }
+}
+
+tbody tr{
+    &:has( > td:nth-last-child(2) .badge-success),
+    &:has( > td:nth-last-child(2) .success) {
+        background-color:oklch(.93 .035 150);    
+    }
+}

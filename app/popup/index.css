@@ -1,0 +1,32 @@
+html{
+    font-size: 1rem;
+}
+body{
+    background:none;
+    background-color: none;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: .5rem;
+}
+
+
+body header,
+body main label{
+    display: flex;
+    align-items: center;
+}
+
+body header{
+    justify-content: space-between;
+}
+
+body main label{
+    gap: .5rem;
+    user-select: none;
+}
+
+body:has(header #PluginSwitch:not(:checked)) main input{
+    opacity: 0.5;
+    pointer-events: none;
+}

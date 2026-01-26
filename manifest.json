@@ -3,20 +3,34 @@
   "name": "FE control",
   "version": "1.0",
   "description": "tema personalizado para el facturador web",
-
+  "permissions": [
+    "storage"
+  ],
+  "action": {
+    "default_popup": "app/popup/index.html"
+  },
+  "background":{
+    "service_worker":"app/background.js"
+  },
   "content_scripts": [
     {
       "matches": [
         "https://e-vf.softwareintegrado.com/*"
       ],
-      "js": ["app/index.js"]
+      "js": [
+        "app/content.js"
+      ],
+      "run_at": "document_idle"
     }
   ],
-
   "web_accessible_resources": [
     {
-      "resources": ["app/*"],
-      "matches": ["https://e-vf.softwareintegrado.com/*"]
+      "resources": [
+        "app/*"
+      ],
+      "matches": [
+        "https://e-vf.softwareintegrado.com/*"
+      ]
     }
   ]
 }

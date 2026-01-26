@@ -1,8 +1,0 @@
-#extension-panel{
-    position: fixed;
-    opacity: .7;
-}
-
-body{
-    background-color: red !important;
-}
