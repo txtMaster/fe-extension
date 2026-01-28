@@ -2,5 +2,6 @@ export const mappedPluginClassNames = [
 	"FixOpsColPlugin",
 	"FixNavBarUserPlugin",
 	"PaintRowsPlugin",
-	"MoveConfirmModalPlugin"
+	"MoveConfirmModalPlugin",
+	"OpenQueryPagePlugin"
 ];
