@@ -21,3 +21,19 @@ export const fetchListeners = {
 		this.listeners.delete(cb);
 	},
 };
+
+const DEFAULT_CONFIG = {
+	enabled: true,
+	plugins: {},
+};
+
+export const getConfig = async () => {
+	const { config } = await chrome.storage.local.get({ config: DEFAULT_CONFIG });
+	return config;
+};
+
+export const replaceConfig = async (callback = (config) => config) => {
+	const config = await getConfig();
+	const newConfig = callback(config);
+	await chrome.storage.local.set({ config: newConfig });
+};

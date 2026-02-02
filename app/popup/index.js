@@ -1,20 +1,5 @@
 import { mappedPluginClassNames } from "/app/plugins/mappedPluginClassNames.js";
-
-const DEFAULT_CONFIG = {
-	enabled: true,
-	plugins: {},
-};
-
-const getConfig = async () => {
-	const { config } = await chrome.storage.local.get({ config: DEFAULT_CONFIG });
-	return config;
-};
-
-const replaceConfig = async (callback = (config) => config) => {
-	const config = await getConfig();
-	const newConfig = callback(config);
-	await chrome.storage.local.set({ config: newConfig });
-};
+import { getConfig, replaceConfig } from "/app/base.js";
 
 const $pluginSwitch = document.getElementById("PluginSwitch");
 
