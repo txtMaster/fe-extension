@@ -3,5 +3,6 @@ export const mappedPluginClassNames = [
 	"FixNavBarUserPlugin",
 	"PaintRowsPlugin",
 	"MoveConfirmModalPlugin",
-	"OpenQueryPagePlugin"
+	"OpenQueryPagePlugin",
+	"FastLoginPlugin"
 ];

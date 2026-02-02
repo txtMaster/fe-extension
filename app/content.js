@@ -13,7 +13,7 @@ globalThis.css = new CSSStyleSheet();
 document.adoptedStyleSheets.push(globalThis.css);
 
 (async () => {
-	const { $ } = await src("/app/base.js");
+	const { dom, fetchListeners } = await src("/app/base.js");
 	//obtener todos las classes de los plugins
 	const { mappedPluginClasses } = await src(
 		"/app/plugins/mappedPluginClasses.js",
@@ -29,27 +29,27 @@ document.adoptedStyleSheets.push(globalThis.css);
 
 	//cargar configuracion
 	/**@type {{ config:object }} */
-	const { config } = await chrome.storage.local.get({ config:{} });
+	const { config } = await chrome.storage.local.get({ config: {} });
 
 	//encender los plugins guardados
-	if(config?.enabled && typeof config?.plugins === "object"){
+	if (config?.enabled && typeof config?.plugins === "object") {
 		for (const pluginName in config.plugins) {
-			const plugin = mappedPlugins[pluginName];			
+			const plugin = mappedPlugins[pluginName];
 			const enabled = config.plugins[pluginName];
 			enabled ? plugin.on() : plugin.off();
 		}
 	}
 
-	chrome.runtime.onMessage.addListener(({payload,type})=>{
-		if(
-			type === "CONFIG_CHANGE" && 
-			typeof payload === "object"){
-			const {plugins} = payload;
+	chrome.runtime.onMessage.addListener(({ payload, type }) => {
+		if (type === "CONFIG_CHANGE" && typeof payload === "object") {
+			const { plugins } = payload;
 			for (const pluginName in plugins) {
 				const pluginState = plugins[pluginName];
 				const plugin = mappedPlugins?.[pluginName];
-				if(plugin) pluginState ? plugin?.on() : plugin?.off();
+				if (plugin) pluginState ? plugin?.on() : plugin?.off();
 			}
+		} else if (type === "FETCH") {
+			fetchListeners.listeners.forEach((callback) => callback(payload));
 		}
 	});
 })();

@@ -4,13 +4,18 @@
   "version": "1.0",
   "description": "tema personalizado para el facturador web",
   "permissions": [
-    "storage"
+    "storage",
+    "webRequest",
+    "tabs"
+  ],
+  "host_permissions": [
+    "https://e-vf.softwareintegrado.com/*"
   ],
   "action": {
     "default_popup": "app/popup/index.html"
   },
-  "background":{
-    "service_worker":"app/background.js"
+  "background": {
+    "service_worker": "app/background.js"
   },
   "content_scripts": [
     {
